@@ -12,11 +12,12 @@ public class Hero extends Actor
      * Act - do whatever the Hero wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int jumpHeight = 20;
+    private int health = 100;
     public void act()
     {
         // Add your action code here.
         moveHero();
+        damageHero();
     }
     
     private void moveHero()
@@ -33,5 +34,32 @@ public class Hero extends Actor
         {
             setLocation(getX(), getY()-3);
         }
+        if(Greenfoot.isKeyDown("down"))
+        {
+            setLocation(getX(), getY()+3);
+        }
     }
+    
+    private void damageHero()
+    {
+        if(Greenfoot.isKeyDown("space"))
+        {
+            attack();
+        }
+    }
+    
+    public void attack()
+    {
+        Enemy enemy = (Enemy) getOneObjectAtOffset(0,0,Enemy.class);
+        if(enemy !=null)
+        {
+            enemy.takeDamage(10);
+        }
+    }
+    
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+    }
+    
 }
