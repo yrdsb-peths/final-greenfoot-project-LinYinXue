@@ -14,12 +14,24 @@ public class Enemy extends Actor
      */
     private int damage = 10;
     private int health = 100;
+    private Label healthBar;
+    
+    public Enemy()
+    {
+        healthBar = new Label("Health:" + health, 20);
+    }
+    public void addedToWorld(World world)
+    {
+        getWorld().addObject(healthBar, getX(), getY() -20);
+    }
     public void act()
     {
         // Add your action code here.
         followHero();
+        updateHealthBar();
         if(health<=0)
         {
+            getWorld().removeObject(healthBar);
             getWorld().removeObject(this);
         }
     }
@@ -28,11 +40,28 @@ public class Enemy extends Actor
     {
         Hero hero = (Hero) getWorld().getObjects(Hero.class).get(0);
         turnTowards(hero.getX(), hero.getY());
-        move(1);
+        move(2);
     }
     
     public void takeDamage(int damage)
     {
         health -= damage;
+    }
+    
+    public int getDamage()
+    {
+        return damage;
+    }
+    
+    public int getHealth()
+    {
+        return health;
+    }
+    
+    private void updateHealthBar()
+    {
+        healthBar.setValue("Health:" + health);
+        healthBar.setLocation(getX(), getY()-20);
+        
     }
 }
