@@ -13,23 +13,13 @@ public class Hero extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int health = 100;
-    private int attackRange = 50;
     private int attackCooldown = 25;
     private int cooldownTime = 0;
     public void act()
     {
         // Add your action code here.
         moveHero();
-        damageHero();
-        if(cooldownTime > 0)
-        {
-            cooldownTime--;
-        }
-        if(Greenfoot.isKeyDown("a") && cooldownTime == 0)
-        {
-            attack();
-            cooldownTime = attackCooldown;
-        }
+        checkAttack();
     }
     
     private void moveHero()
@@ -52,34 +42,34 @@ public class Hero extends Actor
         }
     }
     
-    private void damageHero()
+    private void checkAttack()
     {
-        if(Greenfoot.isKeyDown("space"))
+        if(cooldownTime >0)
+        {
+            cooldownTime--;
+        }
+        if(Greenfoot.isKeyDown("a") && cooldownTime==0)
         {
             attack();
+            cooldownTime = attackCooldown;
         }
     }
     
     public void attack()
     {
-        Enemy enemy = (Enemy) getOneObjectAtOffset(0,0,Enemy.class);
-        if(enemy !=null)
-        {
-            enemy.takeDamage(5);
-        }
+        Weapon weapon = new Weapon();
+        weapon.setRotation(getRotation());
+        getWorld().addObject(weapon, getX(), getY());
     }
     
-    private void checkCollison()
-    {
-        Enemy enemy = (Enemy) getOneIntersectingObject(Enemy.class);
-        if(enemy!=null)
-        {
-            takeDamage(enemy.getDamage());
-        }
-    }
     public void takeDamage(int damage)
     {
         health -= damage;
+        if(health<=0)
+        {
+            getWorld().removeObject(this);
+            Greenfoot.stop();
+        }
     }
     
 }
