@@ -15,6 +15,15 @@ public class Hero extends Actor
     private int health = 100;
     private int attackCooldown = 25;
     private int cooldownTime = 0;
+    private GreenfootImage rightImage;
+    private GreenfootImage leftImage;
+    public Hero()
+    {
+        rightImage = new GreenfootImage("man.png");
+        leftImage = new GreenfootImage (rightImage);
+        leftImage.mirrorVertically();
+        setImage(rightImage);
+    }
     public void act()
     {
         // Add your action code here.
@@ -27,10 +36,14 @@ public class Hero extends Actor
         if(Greenfoot.isKeyDown("left"))
         {
             move(-3);
+            setImage(leftImage);
+            setRotation(180);
         }
         if(Greenfoot.isKeyDown("right"))
         {
             move(3);
+            setImage(rightImage);
+            setRotation(0);
         }
         if(Greenfoot.isKeyDown("up"))
         {
@@ -58,8 +71,16 @@ public class Hero extends Actor
     public void attack()
     {
         Weapon weapon = new Weapon();
-        weapon.setRotation(getRotation());
-        getWorld().addObject(weapon, getX(), getY());
+        if(getRotation()==180)
+        {
+            weapon.setRotation(180);
+            getWorld().addObject(weapon, getX()-20, getY());
+        }
+        else
+        {
+            weapon.setRotation(0);
+            getWorld().addObject(weapon, getX()+20, getY());
+        }
     }
     
     public void takeDamage(int damage)
