@@ -22,5 +22,8 @@ public class MyWorld extends World
         
         Enemy enemy = new Enemy();
         addObject(enemy, 100,300);
+        
+        Boss boss = new Boss();
+        addObject(boss, 100,300);
     }
 }
