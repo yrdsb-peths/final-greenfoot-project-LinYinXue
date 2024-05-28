@@ -1,22 +1,23 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Weapon here.
+ * Write a description of class BossBall here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Weapon extends Actor
+public class BossBall extends Actor
 {
     /**
-     * Act - do whatever the Weapon wants to do. This method is called whenever
+     * Act - do whatever the BossBall wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
     private int damage = 5;
-    public Weapon()
+    public BossBall()
     {
-        GreenfootImage image = new GreenfootImage("blue-draught.png");
-        image.scale(20,20);
+        GreenfootImage image = new GreenfootImage("ball.png");
+        image.scale(10,10);
         setImage(image);
     }
     public void act()
@@ -34,22 +35,13 @@ public class Weapon extends Actor
     }
     private boolean checkCollision()
     {
-        Enemy enemy = (Enemy) getOneIntersectingObject(Enemy.class);
-        if(enemy !=null)
+        Hero hero = (Hero) getOneIntersectingObject(Hero.class);
+        if(hero !=null)
         {
-            enemy.takeDamage(damage);
+            hero.takeDamage(damage);
             getWorld().removeObject(this);
             return true;
-        }  
-        
-        Boss boss = (Boss) getOneIntersectingObject(Boss.class);
-        if(boss !=null)
-        {
-            boss.takeDamage(damage);
-            getWorld().removeObject(this);
-            return true;
-        }    
+        }        
         return false;
-    }
-    
+}
 }

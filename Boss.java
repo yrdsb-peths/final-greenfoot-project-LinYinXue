@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Random;
 
 /**
  * Write a description of class Boss here.
@@ -13,8 +14,11 @@ public class Boss extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int damage = 100;
-    private int health = 1000;
+    private int health = 10000;
+    private int shootCooldown = 50;
+    private int cooldownTime = 0;
     private Label healthBar;
+    private Random random = new Random();
     public Boss()
     {
         healthBar = new Label("Health:" + health, 20);
@@ -27,6 +31,9 @@ public class Boss extends Actor
     {
         // Add your action code here.
         updateHealthBar();
+        moveRandomly();
+        checkFire();
+
         if(health<=0)
         {
             getWorld().removeObject(healthBar);
@@ -54,4 +61,33 @@ public class Boss extends Actor
         healthBar.setLocation(getX(), getY()-20);
         
     }
+    
+    private void moveRandomly()
+    {
+        if(random.nextInt(100)<2)
+        {
+            setRotation(random.nextInt(360));
+        }
+    }
+    
+    private void checkFire()
+    {
+        if(cooldownTime >0)
+        {
+            cooldownTime--;
+        }
+        if(cooldownTime ==0)
+        {
+            shoot();
+            cooldownTime = shootCooldown;
+        }
+    }
+    private void shoot()
+    {
+        Hero hero = (Hero) getWorld().getObjects(Hero.class).get(0);
+        BossBall bossBall = new BossBall();
+        getWorld().addObject(bossBall, getX(), getY());
+        bossBall.turnTowards(hero.getX(), hero.getY());
+    }
+  
 }
