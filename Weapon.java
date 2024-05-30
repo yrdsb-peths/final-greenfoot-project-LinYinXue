@@ -41,7 +41,6 @@ public class Weapon extends Actor
             getWorld().removeObject(this);
             return true;
         }  
-        
         Boss boss = (Boss) getOneIntersectingObject(Boss.class);
         if(boss !=null)
         {

@@ -17,6 +17,7 @@ public class Hero extends Actor
     private int cooldownTime = 0;
     private GreenfootImage rightImage;
     private GreenfootImage leftImage;
+    private boolean facingRight = true;
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
@@ -35,23 +36,25 @@ public class Hero extends Actor
     {
         if(Greenfoot.isKeyDown("left"))
         {
-            move(-3);
+            setLocation(getX()-4, getY());
             setImage(leftImage);
             setRotation(180);
+            facingRight = false;
         }
         if(Greenfoot.isKeyDown("right"))
         {
-            move(3);
+            setLocation(getX()+4, getY());
             setImage(rightImage);
             setRotation(0);
+            facingRight = true;
         }
         if(Greenfoot.isKeyDown("up"))
         {
-            setLocation(getX(), getY()-3);
+            setLocation(getX(), getY()-4);
         }
         if(Greenfoot.isKeyDown("down"))
         {
-            setLocation(getX(), getY()+3);
+            setLocation(getX(), getY()+4);
         }
     }
     
@@ -71,15 +74,15 @@ public class Hero extends Actor
     public void attack()
     {
         Weapon weapon = new Weapon();
-        if(getRotation()==180)
+        if(facingRight)
         {
-            weapon.setRotation(180);
-            getWorld().addObject(weapon, getX()-20, getY());
+            getWorld().addObject(weapon, getX()+20, getY());
+            weapon.setRotation(0);
         }
         else
         {
-            weapon.setRotation(0);
-            getWorld().addObject(weapon, getX()+20, getY());
+            getWorld().addObject(weapon, getX()-20, getY());
+            weapon.setRotation(180);
         }
     }
     
