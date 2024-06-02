@@ -18,6 +18,7 @@ public class Hero extends Actor
     private GreenfootImage rightImage;
     private GreenfootImage leftImage;
     private boolean facingRight = true;
+    private int enemyKilled =0;
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
@@ -30,6 +31,8 @@ public class Hero extends Actor
         // Add your action code here.
         moveHero();
         checkAttack();
+        updateEnemyCounter();
+        checkCollisions();
     }
     
     private void moveHero()
@@ -95,5 +98,19 @@ public class Hero extends Actor
             Greenfoot.stop();
         }
     }
+        
+    public void updateEnemyCounter()
+    {
+        World world = getWorld();
+        GreenfootImage image = new GreenfootImage("Enemies Killed: "+enemyKilled,20, Color.WHITE,Color.BLACK);
+        world.getBackground().drawImage(image, world.getWidth()-150,10);
+    }
     
+    private void checkCollisions()
+    {
+        if(isTouching(Enemy.class))
+        {
+            health -=10;
+        }
+    }
 }

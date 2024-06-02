@@ -12,7 +12,7 @@ public class Weapon extends Actor
      * Act - do whatever the Weapon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int damage = 5;
+    private int damage = 10;
     public Weapon()
     {
         GreenfootImage image = new GreenfootImage("blue-draught.png");

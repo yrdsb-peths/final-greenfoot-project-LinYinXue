@@ -14,14 +14,18 @@ public class Level extends World
      */
     private int enemyCount =5;
     private MyWorld world;
+    private HealthBar healthBar;
     public Level()
     {
         super(800, 600,1);
         this.world = world;
         prepare();
+        healthBar = new HealthBar(100);
+        addObject(healthBar, 100, 20);
     }
     private void prepare()
     {
+        healthBar = new HealthBar(100);
         Hero hero = new Hero();
         addObject(hero, 100, 300);
         for (int i = 0; i<enemyCount; i++)
