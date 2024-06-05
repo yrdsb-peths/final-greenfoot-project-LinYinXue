@@ -6,18 +6,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Weapon extends Actor
+public class Attack extends Actor
 {
     /**
      * Act - do whatever the Weapon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int damage = 10;
-    public Weapon()
+    GreenfootImage [] attack = new GreenfootImage[4];
+    int imageIndex = 0;
+    public Attack()
     {
-        GreenfootImage image = new GreenfootImage("blue-draught.png");
-        image.scale(20,20);
-        setImage(image);
+        for(int i = 0; i< attack.length; i++)
+        {
+            attack[i] = new GreenfootImage("images/Attack_sprite/attack"+i+".png");
+            attack[i].scale(30,30);
+        }
+        setImage(attack[0]);
     }
     public void act()
     {
@@ -31,6 +36,12 @@ public class Weapon extends Actor
         {
             getWorld().removeObject(this);
         }
+        animateAttack();
+    }
+    private void animateAttack()
+    {
+        setImage(attack[imageIndex]);
+        imageIndex = (imageIndex + 1)% attack.length;
     }
     private boolean checkCollision()
     {

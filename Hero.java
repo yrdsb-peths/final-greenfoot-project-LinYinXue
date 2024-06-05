@@ -18,7 +18,6 @@ public class Hero extends Actor
     private GreenfootImage rightImage;
     private GreenfootImage leftImage;
     private boolean facingRight = true;
-    private int enemyKilled =0;
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
@@ -31,7 +30,6 @@ public class Hero extends Actor
         // Add your action code here.
         moveHero();
         checkAttack();
-        updateEnemyCounter();
         checkCollisions();
     }
     
@@ -76,16 +74,16 @@ public class Hero extends Actor
     
     public void attack()
     {
-        Weapon weapon = new Weapon();
+        Attack attack = new Attack();
         if(facingRight)
         {
-            getWorld().addObject(weapon, getX()+20, getY());
-            weapon.setRotation(0);
+            getWorld().addObject(attack, getX()+20, getY());
+            attack.setRotation(0);
         }
         else
         {
-            getWorld().addObject(weapon, getX()-20, getY());
-            weapon.setRotation(180);
+            getWorld().addObject(attack, getX()-20, getY());
+            attack.setRotation(180);
         }
     }
     
@@ -97,13 +95,6 @@ public class Hero extends Actor
             getWorld().removeObject(this);
             Greenfoot.stop();
         }
-    }
-        
-    public void updateEnemyCounter()
-    {
-        World world = getWorld();
-        GreenfootImage image = new GreenfootImage("Enemies Killed: "+enemyKilled,20, Color.WHITE,Color.BLACK);
-        world.getBackground().drawImage(image, world.getWidth()-150,10);
     }
     
     private void checkCollisions()
