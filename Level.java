@@ -12,7 +12,7 @@ public class Level extends World
      * Act - do whatever the Level1 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int enemyCount =5;
+    private int enemyCount =2;
     private MyWorld world;
     private HealthBar healthBar;
     public Level()
@@ -31,14 +31,6 @@ public class Level extends World
         for (int i = 0; i<enemyCount; i++)
         {
             addObject(new Enemy(), Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getHeight()));
-        }
-    }
-    public void act()
-    {
-        // Add your action code here.
-        if(getObjects(Enemy.class).isEmpty())
-        {
-            world.returnHome();
         }
     }
     
