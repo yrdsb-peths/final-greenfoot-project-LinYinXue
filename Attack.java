@@ -13,16 +13,20 @@ public class Attack extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int damage = 10;
-    GreenfootImage [] attack = new GreenfootImage[4];
-    int imageIndex = 0;
+    private GreenfootImage[] frame;
+    private int currentFrame;
+    private int animationSpeed;
+    private int animationCounter;
     public Attack()
     {
-        for(int i = 0; i< attack.length; i++)
+        frame = new GreenfootImage[4];
+        for(int i = 0; i< frame.length; i++)
         {
-            attack[i] = new GreenfootImage("images/Attack_sprite/attack"+i+".png");
-            attack[i].scale(30,30);
+            frame[i] = new GreenfootImage("images/Attack_sprite/attack"+i+".png");
+            frame[i].scale(30,30);
         }
-        setImage(attack[0]);
+        setImage(frame[currentFrame]);
+        animationSpeed = 5;
     }
     public void act()
     {
@@ -40,8 +44,12 @@ public class Attack extends Actor
     }
     private void animateAttack()
     {
-        setImage(attack[imageIndex]);
-        imageIndex = (imageIndex + 1)% attack.length;
+        animationCounter++;
+        if(animationCounter % animationSpeed ==0)
+        {
+            currentFrame = (currentFrame + 1) % frame.length;
+            setImage(frame[currentFrame]);
+        }
     }
     private boolean checkCollision()
     {

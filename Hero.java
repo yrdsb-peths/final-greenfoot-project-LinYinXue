@@ -18,12 +18,14 @@ public class Hero extends Actor
     private GreenfootImage rightImage;
     private GreenfootImage leftImage;
     private boolean facingRight = true;
+    private HealthBar healthBar;
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
         leftImage = new GreenfootImage (rightImage);
         leftImage.mirrorVertically();
         setImage(rightImage);
+        healthBar = new HealthBar(health);
     }
     public void act()
     {

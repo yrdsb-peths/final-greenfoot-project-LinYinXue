@@ -44,10 +44,6 @@ public class MyWorld extends World
             Greenfoot.setWorld(new Level());
 
         }
-        else if (levelName.equals ("BossLevel"))
-        {
-            Greenfoot.setWorld(new BossLevel());
-        }
     }
     
     public void returnHome()
