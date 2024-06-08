@@ -37,12 +37,15 @@ public class MyWorld extends World
     {
         return hero;
     }
-    public void startLevel(String levelName)
+    public void startLevel(String nextWorld)
     {
-        if(levelName.equals("Level"))
+        if("MyWorld".equals(nextWorld))
+        {
+            Greenfoot.setWorld(new MyWorld());
+        }
+        else if ("Level".equals(nextWorld))
         {
             Greenfoot.setWorld(new Level());
-
         }
     }
     

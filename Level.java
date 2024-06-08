@@ -13,12 +13,11 @@ public class Level extends World
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int enemyCount =2;
-    private MyWorld world;
+    private boolean entranceAdded = false;
     private HealthBar healthBar;
     public Level()
     {
         super(800, 600,1);
-        this.world = world;
         prepare();
         healthBar = new HealthBar(100);
         addObject(healthBar, 100, 20);
@@ -31,6 +30,33 @@ public class Level extends World
         for (int i = 0; i<enemyCount; i++)
         {
             addObject(new Enemy(), Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getHeight()));
+        }
+    }
+    
+    public void act()
+    {
+        checkEnemies();
+    }
+    
+    public void checkEnemies()
+    {
+        if(getObjects(Enemy.class).isEmpty()&&!entranceAdded)
+        {
+            Entrance entrance = new Entrance("My World");
+            addObject(entrance, getWidth()/2, getHeight()/2);
+            entranceAdded = true;
+        }
+    }
+    
+    public void startLevel(String nextWorld)
+    {
+        if("MyWorld".equals(nextWorld))
+        {
+            Greenfoot.setWorld(new MyWorld());
+        }
+        else if ("Level".equals(nextWorld))
+        {
+            Greenfoot.setWorld(new Level());
         }
     }
     

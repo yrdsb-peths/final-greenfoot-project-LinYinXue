@@ -22,8 +22,15 @@ public class Entrance extends Actor
         // Add your action code here.
         if(isTouching(Hero.class))
         {
-            MyWorld world = (MyWorld) getWorld();
-            world.startLevel(nextWorld);
+            World world = getWorld();
+            if(world instanceof MyWorld)
+            {
+                ((MyWorld)world).startLevel(nextWorld);
+            }
+            else if(world instanceof Level)
+            {
+                ((Level)world).startLevel(nextWorld);
+            }
         }
     }
 }
