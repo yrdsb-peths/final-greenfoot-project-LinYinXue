@@ -18,14 +18,14 @@ public class Hero extends Actor
     private GreenfootImage rightImage;
     private GreenfootImage leftImage;
     private boolean facingRight = true;
-    private HealthBar healthBar;
+    private int cooldownCounter=0;
+    private int hitCooldown = 100;
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
         leftImage = new GreenfootImage (rightImage);
         leftImage.mirrorVertically();
         setImage(rightImage);
-        healthBar = new HealthBar(health);
     }
     public void act()
     {
@@ -33,6 +33,8 @@ public class Hero extends Actor
         moveHero();
         checkAttack();
         checkCollisions();
+        displayHealth();
+        cooldownCounter++;
     }
     
     private void moveHero()
@@ -94,16 +96,24 @@ public class Hero extends Actor
         health -= damage;
         if(health<=0)
         {
-            getWorld().removeObject(this);
             Greenfoot.stop();
         }
     }
     
     private void checkCollisions()
     {
-        if(isTouching(Enemy.class))
+        Enemy enemy = (Enemy) getOneIntersectingObject(Enemy.class);
+        if(enemy !=null && cooldownCounter > hitCooldown)
         {
             health -=10;
+            cooldownCounter =0;
         }
     }
+    
+    private void displayHealth()
+    {
+        getWorld().showText("Health: " + health, 80,20);
+    }
+ 
 }
+
