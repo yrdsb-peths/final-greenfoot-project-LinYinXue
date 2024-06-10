@@ -5,7 +5,7 @@ Consider using **Markdown** syntax to format the text in this file. [Markdown ba
 
 # Game title: 
 ideas: 2d adventure (obstancle, enemy damage, npc-interact) 
-- one level and a boss level
+- one level and a boss fight
 - clear the level by defeating all enemies and enter the entrance to teleport to village
 
  
@@ -16,6 +16,6 @@ ideas: 2d adventure (obstancle, enemy damage, npc-interact)
 - Press 'A' to attack enemies
 
 **GamePlay/Achivements and scoring** 
-There are 3 Achievements for players to obtain. Players are to collect weapons as each level is complete. There are 5 weapon in total + hidden.
+There are 5 weapon in total + hidden.
   
 
