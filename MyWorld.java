@@ -18,7 +18,7 @@ public class MyWorld extends World
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
+        super(700, 500, 1);
         prepare();
         bgm = new GreenfootSound("BGM.mp3");
         bgm.setVolume(30);
@@ -29,13 +29,11 @@ public class MyWorld extends World
     {
         hero = new Hero();
         addObject(hero, 100, 300);
-        
+
         Entrance entranceLevel = new Entrance("Level");
         addObject(entranceLevel,400, 300);
-    
-        Entrance entranceBossLevel = new Entrance("BossLevel");
-        addObject(entranceBossLevel,400, 300);
     }
+
     public Hero getHero()
     {
         return hero;

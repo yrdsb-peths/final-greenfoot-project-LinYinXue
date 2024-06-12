@@ -16,7 +16,7 @@ public class Level extends World
     private boolean entranceAdded = false;
     public Level()
     {
-        super(800, 600,1);
+        super(700, 500,1);
         prepare();
     }
     private void prepare()
@@ -42,6 +42,10 @@ public class Level extends World
             addObject(entrance, getWidth()/2, getHeight()/2);
             entranceAdded = true;
         }
+    }
+    public void leaveLevel()
+    {
+        
     }
     
     public void startLevel(String nextWorld)

@@ -17,19 +17,19 @@ public class Entrance extends Actor
     {
         this.nextWorld = nextWorld;
     }
+    public String getNextWord()
+    {
+        return nextWorld;
+    }
     public void act()
     {
-        // Add your action code here.
+        // check if entrance is touching the hero.
         if(isTouching(Hero.class))
         {
-            World world = getWorld();
-            if(world instanceof MyWorld)
+            Hero hero = (Hero) getOneIntersectingObject(Hero.class);
+            if(hero!=null)
             {
-                ((MyWorld)world).startLevel(nextWorld);
-            }
-            else if(world instanceof Level)
-            {
-                ((Level)world).startLevel(nextWorld);
+                hero.goToWorld(nextWorld);
             }
         }
     }

@@ -19,7 +19,7 @@ public class Hero extends Actor
     private GreenfootImage leftImage;
     private boolean facingRight = true;
     private int cooldownCounter=0;
-    private int hitCooldown = 100;
+    private int hitCooldown = 50;
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
