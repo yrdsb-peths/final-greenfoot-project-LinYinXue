@@ -3,7 +3,7 @@ This is the README.md file.
 
 Consider using **Markdown** syntax to format the text in this file. [Markdown basics](https://www.markdownguide.org/getting-started/)
 
-# Game title: 
+# Game title: Adventure Time
 ideas: 2d adventure (obstancle, enemy damage, npc-interact) 
 - one level and a boss fight
 - clear the level by defeating all enemies and enter the entrance to teleport to village
