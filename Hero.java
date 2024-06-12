@@ -30,11 +30,18 @@ public class Hero extends Actor
     public void act()
     {
         // Add your action code here.
-        moveHero();
-        checkAttack();
-        checkCollisions();
-        displayHealth();
-        cooldownCounter++;
+        if(health>0)
+        {
+            moveHero();
+            checkAttack();
+            checkCollisions();
+            displayHealth();
+            cooldownCounter++;
+        }
+        else
+        {
+            gameOver();
+        }
     }
     
     private void moveHero()
@@ -113,6 +120,11 @@ public class Hero extends Actor
     private void displayHealth()
     {
         getWorld().showText("Health: " + health, 80,20);
+    }
+    
+    private void gameOver()
+    {
+        Greenfoot.setWorld(new GameOver());
     }
  
 }

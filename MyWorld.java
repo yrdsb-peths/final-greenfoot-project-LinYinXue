@@ -14,11 +14,15 @@ public class MyWorld extends World
      * 
      */
     private Hero hero;
+    private GreenfootSound bgm;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         prepare();
+        bgm = new GreenfootSound("BGM.mp3");
+        bgm.setVolume(30);
+        bgm.playLoop();
     }
     
     private void prepare()
