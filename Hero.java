@@ -15,18 +15,48 @@ public class Hero extends Actor
     private int health = 1000;
     private int attackCooldown = 20;
     private int cooldownTime = 0;
-    private GreenfootImage rightImage;
-    private GreenfootImage leftImage;
+    GreenfootImage[] idleRight = new GreenfootImage[6];
+    GreenfootImage[] idleLeft = new GreenfootImage[6];
     private boolean facingRight = true;
     private int cooldownCounter=0;
     private int hitCooldown = 60;
     private String weapon = "None";
+    SimpleTimer animationTimer = new SimpleTimer();
     public Hero()
     {
-        rightImage = new GreenfootImage("man.png");
-        leftImage = new GreenfootImage (rightImage);
-        leftImage.mirrorVertically();
-        setImage(rightImage);
+        for(int i = 0; i < idleRight.length; i++)
+        {
+            idleRight[i] = new GreenfootImage("images/idle_Witch/idle" +i+".png");
+            idleRight[i].scale(60,70);
+        }
+        
+        for(int i = 0; i < idleLeft.length; i++)
+        {
+            idleLeft[i] = new GreenfootImage(idleRight[i]);
+            idleLeft[i].mirrorVertically();
+        }
+        
+        animationTimer.mark();
+        setImage(idleRight[0]);
+    }
+    int imageIndex = 0;
+    
+    public void animateHero()
+    {
+        int animationSpeed = 100;
+        if(animationTimer.millisElapsed()>animationSpeed)
+        {
+            animationTimer.mark();
+        }    
+        if(facingRight)
+        {
+            setImage(idleRight[imageIndex]);
+        }
+        else
+        {
+            setImage(idleLeft[imageIndex]);
+        }
+        imageIndex = (imageIndex +1)% idleLeft.length;
     }
     public void act()
     {
@@ -34,6 +64,7 @@ public class Hero extends Actor
         if(health>0)
         {
             moveHero();
+            animateHero();
             checkAttack();
             checkCollisions();
             displayHealth();
@@ -50,14 +81,12 @@ public class Hero extends Actor
         if(Greenfoot.isKeyDown("left"))
         {
             setLocation(getX()-4, getY());
-            setImage(leftImage);
             setRotation(180);
             facingRight = false;
         }
         if(Greenfoot.isKeyDown("right"))
         {
             setLocation(getX()+4, getY());
-            setImage(rightImage);
             setRotation(0);
             facingRight = true;
         }
@@ -70,7 +99,7 @@ public class Hero extends Actor
             setLocation(getX(), getY()+4);
         }
     }
-    
+
     private void checkAttack()
     {
         if(cooldownTime >0)
