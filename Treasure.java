@@ -12,6 +12,16 @@ public class Treasure extends Actor
      * Act - do whatever the Treasure wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    private String [] weapon = {"Sword","Axe","Bow","Hammer","Sheid","Dagger"};
+    private String [] weaponImages = {"Sword","Axe","Bow","Hammer","Sheid","Dagger"};
+    private GreenfootImage treasure;
+    private GreenfootSound treasureSound;
+    public Treasure()
+    {
+        treasure = new GreenfootImage("treasure.png");
+        treasure.scale(60,60); 
+        setImage(treasure);
+    }
     public void act()
     {
         if(isTouching(Hero.class))
@@ -19,16 +29,10 @@ public class Treasure extends Actor
             Hero hero = (Hero) getOneIntersectingObject(Hero.class);
             if(hero!= null)
             {
-                String weapon = getRandomWeapon();
-                hero.obtainWeapon(weapon);
                 Greenfoot.playSound("treasure_open.mp3");
                 hero.goToWorld("MyWorld");
             }
         }
     }
-    private String getRandomWeapon()
-    {
-        int index = Greenfoot.getRandomNumber(weapons.length);
-        return weapons[index];
-    }
+    
 }

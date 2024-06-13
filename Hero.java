@@ -12,15 +12,15 @@ public class Hero extends Actor
      * Act - do whatever the Hero wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int health = 100;
-    private int attackCooldown = 25;
+    private int health = 1000;
+    private int attackCooldown = 20;
     private int cooldownTime = 0;
     private GreenfootImage rightImage;
     private GreenfootImage leftImage;
     private boolean facingRight = true;
     private int cooldownCounter=0;
-    private int hitCooldown = 50;
-    private String weapon = "None"
+    private int hitCooldown = 60;
+    private String weapon = "None";
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
@@ -141,5 +141,6 @@ public class Hero extends Actor
             Greenfoot.setWorld(level);
         }
     }
+
  
 }
