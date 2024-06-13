@@ -12,8 +12,9 @@ public class Level extends World
      * Act - do whatever the Level1 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int enemyCount =2;
-    private boolean entranceAdded = false;
+    private int minEnemies = 4;
+    private int maxEnemies = 9;
+    private boolean treasureAdded = false;
     public Level()
     {
         super(700, 500,1);
@@ -23,7 +24,8 @@ public class Level extends World
     {
         Hero hero = new Hero();
         addObject(hero, 100, 300);
-        for (int i = 0; i<enemyCount; i++)
+        int numberOfEnemies = Greenfoot.getRandomNumber(maxEnemies - minEnemies +1) +minEnemies;
+        for (int i = 0; i<numberOfEnemies; i++)
         {
             addObject(new Enemy(), Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getHeight()));
         }
@@ -31,33 +33,16 @@ public class Level extends World
     
     public void act()
     {
-        checkEnemies();
-    }
-    
-    public void checkEnemies()
-    {
-        if(getObjects(Enemy.class).isEmpty()&&!entranceAdded)
+        if(getObjects(Enemy.class).isEmpty()&&!treasureAdded)
         {
-            Entrance entrance = new Entrance("My World");
-            addObject(entrance, getWidth()/2, getHeight()/2);
-            entranceAdded = true;
-        }
-    }
-    public void leaveLevel()
-    {
-        
-    }
-    
-    public void startLevel(String nextWorld)
-    {
-        if("MyWorld".equals(nextWorld))
-        {
-            Greenfoot.setWorld(new MyWorld());
-        }
-        else if ("Level".equals(nextWorld))
-        {
-            Greenfoot.setWorld(new Level());
+            addTreasure();
+            treasureAdded = true;
         }
     }
     
+    public void addTreasure()
+    {
+        Treasure treasure = new Treasure();
+        addObject(treasure, getWidth()/2, getHeight()/2);
+    }
 }

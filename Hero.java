@@ -20,6 +20,7 @@ public class Hero extends Actor
     private boolean facingRight = true;
     private int cooldownCounter=0;
     private int hitCooldown = 50;
+    private String weapon = "None"
     public Hero()
     {
         rightImage = new GreenfootImage("man.png");
@@ -126,6 +127,19 @@ public class Hero extends Actor
     {
         Greenfoot.setWorld(new GameOver());
     }
+    
+    public void goToWorld(String nextWorld)
+    {
+        if("MyWorld".equals(nextWorld))
+        {
+            MyWorld myWorld = new MyWorld();
+            Greenfoot.setWorld(myWorld);
+        }
+        else if ("Level".equals(nextWorld))
+        {
+            Level level = new Level();
+            Greenfoot.setWorld(level);
+        }
+    }
  
 }
-

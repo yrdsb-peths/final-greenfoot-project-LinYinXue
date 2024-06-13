@@ -14,6 +14,7 @@ public class MyWorld extends World
      * 
      */
     private Hero hero;
+    private int enemyCount;
     private GreenfootSound bgm;
     public MyWorld()
     {    
@@ -29,7 +30,7 @@ public class MyWorld extends World
     {
         hero = new Hero();
         addObject(hero, 100, 300);
-
+        
         Entrance entranceLevel = new Entrance("Level");
         addObject(entranceLevel,400, 300);
     }

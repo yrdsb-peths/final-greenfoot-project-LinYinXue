@@ -13,9 +13,13 @@ public class Entrance extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private String nextWorld;
+    private GreenfootImage teleport;
     public Entrance (String nextWorld)
     {
         this.nextWorld = nextWorld;
+        teleport = new GreenfootImage("teleport.png");
+        teleport.scale(140,130); 
+        setImage(teleport);
     }
     public String getNextWord()
     {
@@ -29,7 +33,7 @@ public class Entrance extends Actor
             Hero hero = (Hero) getOneIntersectingObject(Hero.class);
             if(hero!=null)
             {
-                hero.goToWorld(nextWorld);
+              hero.goToWorld(nextWorld);
             }
         }
     }
