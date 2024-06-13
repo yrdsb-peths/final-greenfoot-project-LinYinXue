@@ -12,7 +12,7 @@ public class Hero extends Actor
      * Act - do whatever the Hero wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int health = 1000;
+    private int health = 150;
     private int attackCooldown = 20;
     private int cooldownTime = 0;
     GreenfootImage[] idleRight = new GreenfootImage[6];
@@ -47,16 +47,17 @@ public class Hero extends Actor
         if(animationTimer.millisElapsed()>animationSpeed)
         {
             animationTimer.mark();
+            if(facingRight)
+            {
+                setImage(idleRight[imageIndex]);
+            }
+            else
+            {
+                setImage(idleLeft[imageIndex]);
+            }
+            imageIndex = (imageIndex +1)% idleLeft.length;
         }    
-        if(facingRight)
-        {
-            setImage(idleRight[imageIndex]);
-        }
-        else
-        {
-            setImage(idleLeft[imageIndex]);
-        }
-        imageIndex = (imageIndex +1)% idleLeft.length;
+        
     }
     public void act()
     {
