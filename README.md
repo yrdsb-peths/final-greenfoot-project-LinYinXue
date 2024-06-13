@@ -16,6 +16,8 @@ Consider using **Markdown** syntax to format the text in this file. [Markdown ba
 - Press 'A' to attack enemies
 
 **GamePlay/Achivements and scoring** 
-There are 5 weapon in total + hidden.
+There are 6 weapon in total + hidden.
   
-
+Credit: 
+https://deepdivegamestudio.itch.io/monstergiantassetpack?download
+https://cainos.itch.io/pixel-art-top-down-basic
