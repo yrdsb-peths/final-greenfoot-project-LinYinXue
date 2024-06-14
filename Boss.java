@@ -19,10 +19,28 @@ public class Boss extends Actor
     private int cooldownTime = 0;
     private Label healthBar;
     private Random random = new Random();
+    private GreenfootImage[] frames;
+    private int currentFrame = 0;
+    private int animationSpeed = 10;
     public Boss()
     {
         healthBar = new Label("Health:" + health, 20);
+        frames = new GreenfootImage[8];
+        for(int i =0; i < frames.length;i++)
+        {
+            frames[i] = new GreenfootImage("images/boss/boss" +i+".png");
+        }
+        setImage(frames[currentFrame]);
     }
+    
+    private void animateBoss() 
+    {
+        if (cooldownTime % animationSpeed == 0) {
+            setImage(frames[currentFrame]);
+            currentFrame = (currentFrame + 1) % frames.length;
+        }
+    }
+    
     public void addedToWorld(World world)
     {
         getWorld().addObject(healthBar, getX(), getY() -20);
@@ -33,6 +51,7 @@ public class Boss extends Actor
         updateHealthBar();
         moveRandomly();
         checkFire();
+        animateBoss();
 
         if(health<=0)
         {

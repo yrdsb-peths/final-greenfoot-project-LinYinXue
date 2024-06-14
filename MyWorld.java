@@ -44,27 +44,33 @@ public class MyWorld extends World
         if("MyWorld".equals(nextWorld))
         {
             Greenfoot.setWorld(new MyWorld());
+            restartGame();
         }
         else if ("Level".equals(nextWorld))
         {
+            bgm.stop();
             Greenfoot.setWorld(new Level());
         }
     }
     
     public void returnHome()
     {
+        bgm.stop();
         Greenfoot.setWorld(this);
         hero.setLocation(100,300);
     }
     
-    public void act() {
-        if (Greenfoot.isKeyDown("r")) {
+    public void act() 
+    {
+        if (Greenfoot.isKeyDown("r")) 
+        {
             restartGame();
         }
     }
 
-    private void restartGame() {
-        bgm.stop();
+    private void restartGame() 
+    {
+        bgm.stop(); // Stop background music when restarting
         Greenfoot.setWorld(new MyWorld());
     }
     

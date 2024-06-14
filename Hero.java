@@ -22,6 +22,9 @@ public class Hero extends Actor
     private int hitCooldown = 60;
     private String weapon = "None";
     SimpleTimer animationTimer = new SimpleTimer();
+    private int enemiesDefeated = 0;
+    private int level = 1;
+    private int enemiesForLevelUp = 5;
     public Hero()
     {
         for(int i = 0; i < idleRight.length; i++)
@@ -68,7 +71,8 @@ public class Hero extends Actor
             animateHero();
             checkAttack();
             checkCollisions();
-            displayHealth();
+            display();
+            checkDefeatEnemies();
             cooldownCounter++;
         }
         else
@@ -148,14 +152,36 @@ public class Hero extends Actor
         }
     }
     
-    private void displayHealth()
+    private void display()
     {
         getWorld().showText("Health: " + health, 80,20);
+        getWorld().showText("Level: " + level, getWorld().getWidth() - 80,30);
     }
     
+    public void levelUp()
+    {
+        level++;
+    }
     private void gameOver()
     {
         Greenfoot.setWorld(new GameOver());
+    }
+    
+    private void checkDefeatEnemies()
+    {
+        World world = getWorld();
+        if (world != null && world instanceof Level) 
+        {
+            Level level = (Level) world;
+            if (world.getObjects(Enemy.class).isEmpty()) 
+            {
+                enemiesDefeated++; // Increase defeated enemies count
+                if (enemiesDefeated % enemiesForLevelUp == 0) 
+                { // Check for level up
+                    levelUp();
+                }
+            }
+        }
     }
     
     public void goToWorld(String nextWorld)
@@ -171,6 +197,9 @@ public class Hero extends Actor
             Greenfoot.setWorld(level);
         }
     }
-
- 
+    
+    public int getLevel()
+    {
+        return level;
+    }
 }
