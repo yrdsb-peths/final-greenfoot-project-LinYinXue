@@ -57,4 +57,15 @@ public class MyWorld extends World
         hero.setLocation(100,300);
     }
     
+    public void act() {
+        if (Greenfoot.isKeyDown("r")) {
+            restartGame();
+        }
+    }
+
+    private void restartGame() {
+        bgm.stop();
+        Greenfoot.setWorld(new MyWorld());
+    }
+    
 }

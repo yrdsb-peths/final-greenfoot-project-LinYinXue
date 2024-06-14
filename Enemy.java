@@ -15,10 +15,18 @@ public class Enemy extends Actor
     private int damage = 10;
     private int health = 100;
     private Label healthBar;
-    
+    private GreenfootImage[] enemyImages = new GreenfootImage[4];
+    private int imageIndex = 0;
+    private SimpleTimer animationTimer = new SimpleTimer();
     public Enemy()
     {
         healthBar = new Label("Health:" + health, 20);
+        for (int i = 0; i < enemyImages.length; i++) {
+            enemyImages[i] = new GreenfootImage("images/enemy/enemy" + i + ".png");
+            enemyImages[i].scale(40, 50);
+        }
+        animationTimer.mark();
+        setImage(enemyImages[0]);
     }
     public void addedToWorld(World world)
     {
@@ -29,6 +37,7 @@ public class Enemy extends Actor
         // Add your action code here.
         followHero();
         updateHealthBar();
+        animateEnemy();
         if(health<=0)
         {
             getWorld().removeObject(healthBar);
@@ -63,5 +72,15 @@ public class Enemy extends Actor
         healthBar.setValue("Health:" + health);
         healthBar.setLocation(getX(), getY()-20);
         
+    }
+    
+    private void animateEnemy() 
+    {
+        int animationSpeed = 100; // Adjust animation speed 
+        if (animationTimer.millisElapsed() > animationSpeed) {
+            animationTimer.mark();
+            setImage(enemyImages[imageIndex]);
+            imageIndex = (imageIndex + 1) % enemyImages.length;
+        }
     }
 }
