@@ -14,16 +14,26 @@ public class BossBall extends Actor
      */
     
     private int damage = 5;
+    private int animationCounter = 0;
+    private GreenfootImage[] images;
+    private int animationDelay = 5; 
+    private int delayCounter = 0;
     public BossBall()
     {
-        GreenfootImage image = new GreenfootImage("ball.png");
-        image.scale(10,10);
-        setImage(image);
+        int numberOfFrames = 3;
+        images = new GreenfootImage[numberOfFrames];
+
+        for (int i = 0; i < numberOfFrames; i++) {
+            images[i] = new GreenfootImage("images/attack_boss/attack" + (i + 1) + ".png");
+            images[i].scale(40, 40);
+        }
+        setImage(images[0]);
     }
     public void act()
     {
         // Add your action code here.
         move(4);
+        animate();
         if(checkCollision())
         {
             return;
@@ -31,6 +41,16 @@ public class BossBall extends Actor
         if(isAtEdge())
         {
             getWorld().removeObject(this);
+        }
+    }
+    private void animate()
+    {
+        delayCounter++;
+        if (delayCounter >= animationDelay)
+        {
+            delayCounter = 0;
+            animationCounter = (animationCounter + 1) % images.length;
+            setImage(images[animationCounter]);
         }
     }
     private boolean checkCollision()
