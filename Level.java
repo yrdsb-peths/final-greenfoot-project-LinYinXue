@@ -58,7 +58,7 @@ public class Level extends World
         }
     }
     
-    private void spawnBoss()
+    public void spawnBoss()
     {
         Boss boss = new Boss();
         addObject(boss, getWidth()/2, getHeight()/2);

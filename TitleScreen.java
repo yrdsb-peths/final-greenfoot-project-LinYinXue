@@ -16,7 +16,7 @@ public class TitleScreen extends World
     public TitleScreen()
     {    
         super(700, 500, 1); 
-        GreenfootImage bgImage = new GreenfootImage("bluerock.jpg");
+        GreenfootImage bgImage = new GreenfootImage("Title.png");
         bgImage.scale(getWidth(), getHeight());
         setBackground(bgImage);
         

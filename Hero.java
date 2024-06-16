@@ -149,6 +149,20 @@ public class Hero extends Actor
         {
             health -=10;
             cooldownCounter =0;
+            enemiesDefeated++;
+            if (enemiesDefeated % 5 == 0) 
+            {
+                levelUp();
+            }
+            Level level = (Level) getWorld();
+            if (level.getObjects(Enemy.class).isEmpty()) 
+            {
+                if (level.equals(20)) {
+                    level.spawnBoss();
+                } else {
+                    level.addTreasure();
+                }
+            }
         }
     }
     
