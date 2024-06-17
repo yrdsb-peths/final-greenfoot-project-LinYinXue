@@ -14,7 +14,6 @@ public class MyWorld extends World
      * 
      */
     private Hero hero;
-    private int enemyCount;
     private GreenfootSound bgm;
     public MyWorld()
     {    
@@ -48,14 +47,12 @@ public class MyWorld extends World
         }
         else if ("Level".equals(nextWorld))
         {
-            bgm.stop();
             Greenfoot.setWorld(new Level());
         }
     }
     
     public void returnHome()
     {
-        bgm.stop();
         Greenfoot.setWorld(this);
         hero.setLocation(100,300);
     }
@@ -67,11 +64,9 @@ public class MyWorld extends World
             restartGame();
         }
     }
-
     private void restartGame() 
     {
-        bgm.stop(); // Stop background music when restarting
         Greenfoot.setWorld(new MyWorld());
     }
-    
+
 }

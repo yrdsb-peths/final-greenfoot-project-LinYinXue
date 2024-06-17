@@ -18,6 +18,8 @@ public class GameOver extends World
     private int animationSpeed;
     private int animationCounter;
     private GreenfootImage heroImage;
+    private GreenfootSound gameOverSound;
+    private MyWorld world;
     public GameOver()
     {    
         super(700, 500, 1); 
@@ -27,6 +29,14 @@ public class GameOver extends World
         HeroDeath death = new HeroDeath();
         addObject(death,360,300);
         showText("Press 'r' to Restart", getWidth()/2, getHeight()-50);
+        playGameOverSound();
+    }
+
+    private void playGameOverSound() 
+    {
+        gameOverSound = new GreenfootSound("GameOverSound.mp3");
+        gameOverSound.setVolume(40);
+        gameOverSound.play();
     }
     public void act()
     {
@@ -34,5 +44,9 @@ public class GameOver extends World
         {
             Greenfoot.setWorld(new MyWorld());
         }
+    }
+    public MyWorld getWorld()
+    {
+        return world;
     }
 }

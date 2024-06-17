@@ -12,7 +12,7 @@ public class Hero extends Actor
      * Act - do whatever the Hero wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int health = 150;
+    private int health = 100;
     private int attackCooldown = 20;
     private int cooldownTime = 0;
     GreenfootImage[] idleRight = new GreenfootImage[6];
@@ -136,10 +136,6 @@ public class Hero extends Actor
     public void takeDamage(int damage)
     {
         health -= damage;
-        if(health<=0)
-        {
-            Greenfoot.stop();
-        }
     }
     
     private void checkCollisions()
@@ -176,11 +172,10 @@ public class Hero extends Actor
     {
         level++;
     }
-    private void gameOver()
+    private void gameOver() 
     {
         Greenfoot.setWorld(new GameOver());
     }
-    
     private void checkDefeatEnemies()
     {
         World world = getWorld();
@@ -189,9 +184,9 @@ public class Hero extends Actor
             Level level = (Level) world;
             if (world.getObjects(Enemy.class).isEmpty()) 
             {
-                enemiesDefeated++; // Increase defeated enemies count
+                enemiesDefeated++; 
                 if (enemiesDefeated % enemiesForLevelUp == 0) 
-                { // Check for level up
+                { 
                     levelUp();
                 }
             }
