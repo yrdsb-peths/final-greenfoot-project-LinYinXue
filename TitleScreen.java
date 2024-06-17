@@ -8,19 +8,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TitleScreen extends World
 {
-    Label titleLabel = new Label("Adventure Time",90);
     /**
      * Constructor for objects of class TitleScreen.
      * 
      */
     public TitleScreen()
     {    
-        super(700, 500, 1); 
-        GreenfootImage bgImage = new GreenfootImage("Title.png");
+        super(700, 450, 1); 
+        GreenfootImage bgImage = new GreenfootImage("Title_At.png");
         bgImage.scale(getWidth(), getHeight());
         setBackground(bgImage);
         
-        addObject(titleLabel, getWidth()/2, 90);
         prepare();
     }
     
@@ -35,11 +33,13 @@ public class TitleScreen extends World
     
     private void prepare()
     {
+        Hero hero = new Hero();
+        addObject(hero, 360,260);
         Label label = new Label("Press <space> to Start", 40);
-        addObject(label,350,370);
+        addObject(label,360,320);
         Label label2 = new Label("Use \u2190\u2191\u2193\u2192 to move around", 30);
-        addObject(label2,350,295);
+        addObject(label2,360,370);
         Label label3 = new Label("Press <r> to restart", 22);
-        addObject(label3,350,195);
+        addObject(label3,360,195);
     }
 }

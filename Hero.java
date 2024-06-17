@@ -29,7 +29,7 @@ public class Hero extends Actor
     {
         for(int i = 0; i < idleRight.length; i++)
         {
-            idleRight[i] = new GreenfootImage("images/idle_Witch/idle" +i+".png");
+            idleRight[i] = new GreenfootImage("images/hero_idle/idle" +i+".png");
             idleRight[i].scale(60,70);
         }
         

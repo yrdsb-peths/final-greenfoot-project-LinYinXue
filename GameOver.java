@@ -13,12 +13,19 @@ public class GameOver extends World
      * Constructor for objects of class GameOver.
      * 
      */
+    private GreenfootImage[] AnimationFrames;
+    private int currentFrame;
+    private int animationSpeed;
+    private int animationCounter;
+    private GreenfootImage heroImage;
     public GameOver()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(700, 500, 1); 
-        GreenfootImage bg = new GreenfootImage("sand.jpg");
+        GreenfootImage bg = new GreenfootImage("gameover.png");
+        bg.scale(getWidth(), getHeight());
         setBackground(bg);
+        HeroDeath death = new HeroDeath();
+        addObject(death,360,300);
         showText("Press 'r' to Restart", getWidth()/2, getHeight()-50);
     }
     public void act()

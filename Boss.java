@@ -13,8 +13,8 @@ public class Boss extends Actor
      * Act - do whatever the Boss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int damage = 100;
-    private int health = 10000;
+    private int damage = 10;
+    private int health = 1000;
     private int shootCooldown = 50;
     private int cooldownTime = 0;
     private Label healthBar;
