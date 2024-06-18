@@ -25,7 +25,7 @@ public class BossBall extends Actor
 
         for (int i = 0; i < numberOfFrames; i++) {
             images[i] = new GreenfootImage("images/attack_boss/attack" + (i + 1) + ".png");
-            images[i].scale(40, 40);
+            images[i].scale(40, 30);
         }
         setImage(images[0]);
     }

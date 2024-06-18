@@ -15,6 +15,10 @@ public class MyWorld extends World
      */
     private Hero hero;
     private GreenfootSound bgm;
+    private GreenfootImage[] AnimationFrames;
+    private int currentFrame;
+    private int animationSpeed;
+    private int animationCounter;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -23,6 +27,14 @@ public class MyWorld extends World
         bgm = new GreenfootSound("BGM.mp3");
         bgm.setVolume(30);
         bgm.playLoop();
+        AnimationFrames  = new GreenfootImage[6]; 
+        for(int i = 0; i < AnimationFrames.length; i++) 
+        {
+            AnimationFrames[i] = new GreenfootImage("images/village/village" + i + ".png");
+            AnimationFrames[i].scale(getWidth(), getHeight());
+        }
+        setBackground(AnimationFrames[currentFrame]);
+        animationSpeed = 5;
     }
     
     private void prepare()
@@ -31,7 +43,7 @@ public class MyWorld extends World
         addObject(hero, 100, 300);
         
         Entrance entranceLevel = new Entrance("Level");
-        addObject(entranceLevel,400, 300);
+        addObject(entranceLevel,450, 300);
     }
 
     public Hero getHero()
@@ -63,10 +75,19 @@ public class MyWorld extends World
         {
             restartGame();
         }
+        animate();
     }
     private void restartGame() 
     {
         Greenfoot.setWorld(new MyWorld());
     }
-
+    private void animate()
+    {
+        animationCounter++;
+        if(animationCounter % animationSpeed ==0)
+        {
+            currentFrame = (currentFrame + 1) % AnimationFrames.length;
+            setBackground(AnimationFrames[currentFrame]);
+        }
+    }
 }
